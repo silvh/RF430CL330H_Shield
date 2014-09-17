@@ -20,7 +20,7 @@ static const int MAX_PAYLOAD_SIZE = 10 * (1 << 20);  // 10 MB payload limit
  * This is a mapping of "URI Identifier Codes" to URI string prefixes,
  * per section 3.2.2 of the NFC Forum URI Record Type Definition document.
  */
-#if STORED_IN_RAM //stored in ram, need 387 bytes, not recommend
+
 static const String URI_PREFIX_MAP[] =  
 {
   "", // 0x00
@@ -59,82 +59,7 @@ static const String URI_PREFIX_MAP[] =
   "urn:epc:raw:", // 0x21
   "urn:epc:", // 0x22
 };
-#else // stored in PROGram MEMory, the flash ROM memory that your code lives in
-#include <avr/pgmspace.h>
-PROGMEM prog_char string_0[]  = ""; // 0x00
-PROGMEM prog_char string_1[]  = "http://www."; // 0x01
-PROGMEM prog_char string_2[]  = "https://www."; // 0x02
-PROGMEM prog_char string_3[]  = "http://"; // 0x03
-PROGMEM prog_char string_4[]  = "https://"; // 0x04
-PROGMEM prog_char string_5[]  = "tel:"; // 0x05
-PROGMEM prog_char string_6[]  = "mailto:"; // 0x06
-PROGMEM prog_char string_7[]  = "ftp://anonymous:anonymous@"; // 0x07
-PROGMEM prog_char string_8[]  = "ftp://ftp."; // 0x08
-PROGMEM prog_char string_9[]  = "ftps://"; // 0x09
-PROGMEM prog_char string_10[] = "sftp://"; // 0x0A
-PROGMEM prog_char string_11[] = "smb://"; // 0x0B
-PROGMEM prog_char string_12[] = "nfs://"; // 0x0C
-PROGMEM prog_char string_13[] = "ftp://"; // 0x0D
-PROGMEM prog_char string_14[] = "dav://"; // 0x0E
-PROGMEM prog_char string_15[] = "news:"; // 0x0F
-PROGMEM prog_char string_16[] = "telnet://"; // 0x10
-PROGMEM prog_char string_17[] = "imap:"; // 0x11
-PROGMEM prog_char string_18[] = "rtsp://"; // 0x12
-PROGMEM prog_char string_19[] = "urn:"; // 0x13
-PROGMEM prog_char string_20[] = "pop:"; // 0x14
-PROGMEM prog_char string_21[] = "sip:"; // 0x15
-PROGMEM prog_char string_22[] = "sips:"; // 0x16
-PROGMEM prog_char string_23[] = "tftp:"; // 0x17
-PROGMEM prog_char string_24[] = "btspp://"; // 0x18
-PROGMEM prog_char string_25[] = "btl2cap://"; // 0x19
-PROGMEM prog_char string_26[] = "btgoep://"; // 0x1A
-PROGMEM prog_char string_27[] = "tcpobex://"; // 0x1B
-PROGMEM prog_char string_28[] = "irdaobex://"; // 0x1C
-PROGMEM prog_char string_29[] = "file://"; // 0x1D
-PROGMEM prog_char string_30[] = "urn:epc:id:"; // 0x1E
-PROGMEM prog_char string_31[] = "urn:epc:tag:"; // 0x1F
-PROGMEM prog_char string_32[] = "urn:epc:pat:"; // 0x20
-PROGMEM prog_char string_33[] = "urn:epc:raw:"; // 0x21
-PROGMEM prog_char string_34[] = "urn:epc:"; // 0x22
 
-PROGMEM const char *URI_PREFIX_MAP[] = 	{   
-  string_0 ,
-  string_1 ,
-  string_2 ,
-  string_3 ,
-  string_4 ,
-  string_5 , 
-  string_6 ,
-  string_7 ,
-  string_8 ,
-  string_9 ,
-  string_10,
-  string_11, 
-  string_12,
-  string_13,
-  string_14,
-  string_15,
-  string_16,
-  string_17, 
-  string_18,
-  string_19,
-  string_20,
-  string_21,
-  string_22,
-  string_23, 
-  string_24,
-  string_25,
-  string_26,
-  string_27,
-  string_28,
-  string_29, 
-  string_30,
-  string_31,
-  string_32,
-  string_33,
-  string_34,
-};
-#endif
 
 /**
 * Indicates the record is empty.
@@ -210,7 +135,7 @@ void NdefRecord::createUri(String uriString) {
   }
     
   byte prefix = 0;
-#if STORED_IN_RAM
+
   for (int i = 1; i < sizeof(URI_PREFIX_MAP)/sizeof(URI_PREFIX_MAP[0]); i++) { 
     if (uriString.startsWith(URI_PREFIX_MAP[i])) {
       prefix = (byte) i;
@@ -218,21 +143,7 @@ void NdefRecord::createUri(String uriString) {
       break;
     }
   }
-#else
-  uint8_t len = 0x23;
-  String URI_PREFIX;
-  char buffer[15]; // make sure this is large enough for the largest string it must hold
-  for (int i = 1; i < len; i++) { 
-    strcpy_P(buffer, (char*)pgm_read_word(&(URI_PREFIX_MAP[i]))); // Necessary casts and dereferencing, just copy. 
-    URI_PREFIX = buffer;
-    if (uriString.startsWith(URI_PREFIX)) {
-      prefix = (byte) i;
-      uriString = uriString.substring(URI_PREFIX.length());
-      break;
-    }
-  }
-#endif
-
+ 
   byte uriBytes[uriString.length() + 1];
   uriString.getBytes(uriBytes, uriString.length() + 1);
   byte recordBytes[uriString.length() + 1];
