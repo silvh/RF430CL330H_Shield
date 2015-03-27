@@ -1,79 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Rf430cl330h shield : The Texas Instruments Dynamic NFC Interface Transponder RF430CL330H is a NFC Tag Type 4 device." />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Rf430cl330h shield by awong1900</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Rf430cl330h shield</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1>Rf430cl330h shield</h1>
+        <p>The Texas Instruments Dynamic NFC Interface Transponder RF430CL330H is a NFC Tag Type 4 device.</p>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/awong1900/RF430CL330H_Shield">View on GitHub</a>
+        <p class="view"><a href="https://github.com/awong1900/RF430CL330H_Shield">View the Project on GitHub <small>awong1900/RF430CL330H_Shield</small></a></p>
 
-          <h1 id="project_title">Rf430cl330h shield</h1>
-          <h2 id="project_tagline">The Texas Instruments Dynamic NFC Interface Transponder RF430CL330H is a NFC Tag Type 4 device.</h2>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/awong1900/RF430CL330H_Shield/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/awong1900/RF430CL330H_Shield/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+        <ul>
+          <li><a href="https://github.com/awong1900/RF430CL330H_Shield/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/awong1900/RF430CL330H_Shield/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/awong1900/RF430CL330H_Shield">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="rf430cl330h_shield-dnfc-tag" class="anchor" href="#rf430cl330h_shield-dnfc-tag" aria-hidden="true"><span class="octicon octicon-link"></span></a>RF430CL330H_Shield (DNFC Tag)</h1>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<p>The DNFC tag is reprogrammable with a microcontroller with an I2C interface thanks to TI's RF430CL330H dynamic NFC transponder IC.</p>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<h2>
+<a id="info" class="anchor" href="#info" aria-hidden="true"><span class="octicon octicon-link"></span></a>Info</h2>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<ul>
+<li>Indiegogo - <a href="https://www.indiegogo.com/projects/dnfc-tag-nfc-that-interacts-with-microcontroller">info</a>
+</li>
+<li>DNC Tag - <a href="http://www.elecfreaks.com/store/dnfc-tag-p-745.html?zenid=5854397ad30b2f1aeee5a31489913af8">Buy</a>
+</li>
+</ul>
+
+<p><img src="http://www.elecfreaks.com/store/images/DNFC%20TAG-01.jpg" alt="nfc tag"></p>
+
+<h2>
+<a id="start-up" class="anchor" href="#start-up" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start up:</h2>
+
+<ul>
+<li>connect Arduino 2560/UNO with NFC Tag, see <a href="https://github.com/awong1900/RF430CL330H_Shield/blob/master/README.md#connect-guide">Connect Guide</a>.</li>
+<li>make this library to arduino IDE</li>
+<li>use example to test your Tag</li>
+</ul>
+
+<h2>
+<a id="nfc-flower-demo" class="anchor" href="#nfc-flower-demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>NFC flower demo</h2>
+
+<p>use NFC to water flower, and take the temperature, humidity, soil moisture.</p>
+
+<ul>
+<li>Github Arduino Code - <a href="https://github.com/nfcwormhole/NFC-Flower/tree/master/Arduino/nfc_flower">water system</a>
+</li>
+<li>Github Android App Code - <a href="https://github.com/nfcwormhole/NFC-Flower/tree/master/Android/NFC_Flower">water system</a>
+</li>
+<li>Google Play download- <a href="https://play.google.com/store/apps/details?id=com.flower.nfcaction">water system</a>
+</li>
+</ul>
+
+<h2>
+<a id="connect-guide" class="anchor" href="#connect-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect Guide</h2>
+
+<pre><code>//                                            (Host/Tester)
+//                  DNFC Tag                 Arduino 2560/UNO
+//                  (Slave)                      Master
+//             _________________            _________________
+//     3.3V&lt;--|VCC           SDA|&lt;--------&gt;|P20(2560)/A4(UNO)|
+//            |                 |    I2C   |                 |
+//            |              SCL|&lt;--------&gt;|P21(2560)/A5(UNO)|
+//            |                 |          |                 |
+//      GND&lt;--|GND          /RST|&lt;---------|P4               |
+//            |             INTO|---------&gt;|P3(INT1)         |
+//            |                 |          |                 |
+//            |                 |          |                 |
+//            |                 |          |                 |
+//            |_________________|          |_________________|
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<h2>
+<a id="wiki--forum" class="anchor" href="#wiki--forum" aria-hidden="true"><span class="octicon octicon-link"></span></a>Wiki &amp; Forum</h2>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<ul>
+<li>
+<a href="http://www.elecfreaks.com/wiki/index.php?title=Dynamic_NFC_Tag">wiki</a> - More resource about this NFC Tag</li>
+<li>
+<a href="http://www.elecfreaks.com/forum/">Forum</a> - Ask questions and share your feedback</li>
+</ul>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Rf430cl330h shield maintained by <a href="https://github.com/awong1900">awong1900</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/awong1900">awong1900</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-
+    <script src="javascripts/scale.fix.js"></script>
     
-
   </body>
 </html>
